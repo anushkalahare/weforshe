@@ -1,0 +1,113 @@
+<!-- templates/home.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fashion Curation App - Home</title>
+    <style>
+      .outfit-title {
+          font-family: 'Playfair Display', serif;
+          margin: 0;
+          font-size: 18px;
+          line-height: 1.2;
+          height: 2.4em;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: block;
+      }
+  </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="dark-theme">
+    <header class="main-header">
+        <div class="logo">
+          <h1>Moda</h1>
+        </div>
+        <nav>
+          <ul class="nav-links">
+            <li><a href="{{ url_for('create_outfit') }}">Create</a></li>
+            <li><a href="{{ url_for('explore') }}">Explore</a></li>
+            <li><a href="{{ url_for('profile', username=current_user.username) }}">Profile</a></li>
+            <li><a href="{{ url_for('logout') }}">Logout</a></li>
+          </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h2 class="section-title">Curate Your Style</h2>
+            <div class="hero-divider"></div>
+            <p class="section-subtitle">Discover, create, and share unique fashion combinations</p>
+        </section>
+
+        <section class="trending-outfits">
+            <h2 class="section-title">Trending Outfits</h2>
+            <div class="outfit-grid">
+              {% for outfit, like_count in trending_outfits %}
+                <div class="outfit-card">
+                  <div class="outfit-display">
+                    {% for item in outfit.items %}
+                      <img src="{{ url_for('static', filename=item['File path'].replace('C:/Outfit Builder/static/', '')) }}" alt="{{ item['Style'] }}" class="selected-item-image">
+                    {% endfor %}
+                  </div>
+                  <div class="outfit-details">
+                    <h3 class="outfit-title" style="font-family: 'Playfair Display', serif; margin: 0; font-size: 20px; line-height: -1000.1rem; height: -21.4rem; overflow: hidden; display: flex;">
+                      {{ outfit.title }}
+                  </h3>
+                    <p class="creator">By: {{ outfit.creator.username }}</p>
+                    <p class="likes"><i class="fas fa-heart"></i> {{ like_count }}</p>
+        
+                  </div>
+                </div>
+              {% endfor %}
+            </div>
+        </section>
+
+        <section class="trending-products">
+            <h2 class="section-title">Trending Products</h2>
+            <div class="product-grid">
+                {% for product in trending_products %}
+                    <div class="product-card">
+                        <img src="{{ url_for('static', filename=product['file_path'].replace('C:/Outfit Builder/static/', '')) }}" alt="Trending Product" class="product-image">
+                        <p class="product-uses">Buy now</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="latest-creations">
+            <h2 class="section-title">Latest Creations</h2>
+            <div class="outfit-grid">
+                {% for outfit in all_outfits %}
+                    <div class="outfit-card">
+                        <div class="outfit-display">
+                            {% for item in outfit.items %}
+                                <img src="{{ url_for('static', filename=item['File path'].replace('C:/Outfit Builder/static/', '')) }}" alt="{{ item['Style'] }}" class="selected-item-image">
+                            {% endfor %}
+                        </div>
+                        <div class="outfit-details">
+                            <h3 class="outfit-title">{{ outfit.title }}</h3>
+                            <p class="creator">By: {{ outfit.creator.username }}</p>
+                            <p class="likes"><i class="fas fa-heart"></i> {{ outfit.likes.count() }}</p>
+                          
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Fashion Curation App. All rights reserved.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

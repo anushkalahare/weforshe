@@ -1,0 +1,56 @@
+<!-- templates/profile.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ user.username }}'s Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}">
+</head>
+<body class="dark-theme">
+    <header class="main-header">
+        <div class="logo">
+            <h1>Moda</h1>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('create_outfit') }}">Create</a></li>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('explore') }}">Explore</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="profile-section">
+            <h2 class="section-title">Curations Made By You</h2>
+            <div class="outfit-grid">
+                {% for outfit in outfits %}
+                    <div class="outfit-card">
+                        <div class="outfit-image">
+                            <div class="outfit-display">
+                                {% for item in outfit.items %}
+                                    <div class="outfit-item">
+                                        <img src="{{ url_for('static', filename=item['File path'].replace('C:/Outfit Builder/static/', '')) }}" alt="{{ item['Style'] }}">
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="outfit-details">
+                            <h3>{{ outfit.title }}</h3>
+                            <p class="outfit-style">{{ outfit.style }}</p>
+                            <p class="likes">❤ {{ outfit.likes.count() }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Moda. All rights reserved.</p>
+    </footer>
+</body>
+</html>

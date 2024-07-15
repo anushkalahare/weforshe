@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Outfits</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='explore.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <header class="main-header">
+        <div class="logo">
+            <h1>Moda</h1>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('create_outfit') }}">Create</a></li>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('profile', username=current_user.username) }}">Profile</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2 class="section-title">Curator's Creation</h2>
+        <div class="outfit-grid">
+            {% for outfit in outfits %}
+                <div class="outfit-card">
+                    <div class="outfit-display">
+                        {% for item in outfit.items %}
+                            <img src="{{ url_for('static', filename=item['File path'].replace('C:/Outfit Builder/static/', '')) }}" alt="{{ item['Style'] }}" class="selected-item-image">
+                        {% endfor %}
+                    </div>
+                    <div class="outfit-details">
+                        <h3>{{ outfit.title }}</h3>
+                        <p class="creator">By: {{ outfit.creator.username }}</p>
+                        <button class="like-button view-outfit" data-outfit-id="{{ outfit.id }}">
+                            Like (<span class="like-count">{{ outfit.likes.count() }}</span>)
+                        </button>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+    <script>
+        $(document).ready(function() {
+            $('.like-button').click(function() {
+                var outfitId = $(this).data('outfit-id');
+                var button = $(this);
+                $.ajax({
+                    url: '/like/' + outfitId,
+                    type: 'POST',
+                    success: function(response) {
+                        button.find('.like-count').text(response.likes);
+                        if (response.liked) {
+                            button.addClass('liked');
+                        } else {
+                            button.removeClass('liked');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

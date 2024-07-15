@@ -1,0 +1,268 @@
+:root {
+    --color-primary: #CCF095;
+    --color-secondary: #F5F3F1;
+    --color-dark: #121011;
+    --color-accent: #A7836D;
+    --color-bg-dark: #1E1E1E;
+    --color-text-light: #F5F3F1;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-bg-dark);
+    color: var(--color-text-light);
+    line-height: 1.6;
+}
+
+.dark-theme {
+    --color-bg: var(--color-bg-dark);
+    --color-text: var(--color-text-light);
+}
+
+.main-header {
+    background-color: rgba(18, 16, 17, 0.8);
+    padding: 0rem 2rem;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(10px);
+}
+
+.logo h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    margin: 0;
+    color: var(--color-primary);
+}
+
+.nav-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    margin-right: 70px;
+}
+
+.nav-links a {
+    color: var(--color-text-light);
+    text-decoration: none;
+    font-weight: 300;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--color-primary);
+}
+
+main {
+    padding-top: 125px;
+}
+
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: var(--color-primary);
+}
+
+.section-subtitle {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    color: var(--color-accent);
+    margin-bottom: 100px;
+}
+
+.hero {
+    background-image: url('C:/Users/lahar/Downloads/auth-image.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+}
+
+.hero h2 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero-divider {
+    width: 100px;
+    height: 2px;
+    background-color: var(--color-primary);
+    margin: 1px auto;
+}
+
+.outfit-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.outfit-card, .product-card {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.outfit-card:hover, .product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.outfit-display {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 10px;
+    flex-grow: 1;
+}
+
+.selected-item-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.outfit-details {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 120px;  /* Set a fixed height for outfit details */
+}
+
+.outfit-details h3 {
+    font-family: 'Playfair Display', serif;
+    margin: 0 0 10px 0;
+    font-size: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 10px;
+}
+
+.creator, .likes {
+    font-size: 14px;
+    color: var(--color-accent);
+    margin-bottom: -10px;
+}
+
+.view-outfit {
+    display: inline-block;
+    padding: 2px 8px;
+    background-color: var(--color-primary);
+    color: var(--color-dark);
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 10px;
+    transition: background-color 0.3s ease;
+    align-self: flex-start;
+}
+
+.view-outfit:hover {
+    background-color: #b8dc7a;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.product-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.product-uses {
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0.5rem 1rem;
+    color: var(--color-primary);
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+footer {
+    background-color: rgba(18, 16, 17, 0.8);
+    color: var(--color-text-light);
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.outfit-card, .product-card {
+    animation: fadeIn 0.5s ease-out;
+}
+
+@media screen and (max-width: 768px) {
+    .outfit-grid, .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+
+    .selected-item-image {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .logo h1 {
+        font-size: 1.5rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .nav-links a {
+        font-size: 1rem;
+    }
+
+    .hero h2 {
+        font-size: 2.5rem;
+    }
+
+    .outfit-grid, .product-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .selected-item-image {
+        width: 50px;
+        height: 50px;
+    }
+}

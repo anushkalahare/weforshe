@@ -1,0 +1,122 @@
+/* Auth Pages (Login and Register) Styles */
+:root {
+    --color-primary: #CCF095;
+    --color-secondary: #F5F3F1;
+    --color-dark: #121011;
+    --color-accent: #A7836D;
+    --color-bg-dark: #1E1E1E;
+    --color-text-light: #F5F3F1;
+}
+
+.auth-page {
+    background-color: var(--color-bg-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.auth-container {
+    display: flex;
+    background-color: rgba(30, 30, 30, 0.8);
+    border-radius: 10px;
+    overflow: hidden;
+    width: 80%;
+    max-width: 1000px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.auth-form {
+    flex: 1;
+    padding: 2rem;
+}
+
+.auth-form h1 {
+    font-family: 'Playfair Display', serif;
+    color: var(--color-text-light);
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.auth-form p {
+    color: var(--color-accent);
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--color-text-light);
+}
+
+.auth-button {
+    width: 100%;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--color-primary);
+    color: var(--color-dark);
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.auth-button:hover {
+    background-color: #b8dc7a;
+}
+
+.auth-link {
+    margin-top: 1rem;
+    text-align: center;
+    color: var(--color-text-light);
+}
+
+.auth-link a {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+
+.auth-image {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    text-align: center;
+}
+
+.image-overlay h2 {
+    font-family: 'Playfair Display', serif;
+    color: var(--color-primary);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.image-overlay p {
+    color: var(--color-text-light);
+}

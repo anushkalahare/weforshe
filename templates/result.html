@@ -1,0 +1,89 @@
+<!-- templates/result.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outfit Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='result_style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <h1>Your Fashion Curation</h1>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('create_outfit', type='fullbody wear') }}">Create New Outfit</a></li>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('explore') }}">Explore</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="content-wrapper">
+            <section class="latest-curation">
+                <h2>Your Latest Creation</h2>
+                <div class="outfit-display">
+                    {% for item in selected_items %}
+                        <img src="{{ url_for('static', filename=item['File path'].replace('C:/Outfit Builder/static/', '')) }}" alt="{{ item['Style'] }}" class="selected-item-image">
+                    {% endfor %}
+                </div>
+            </section>
+
+            <section class="style-profile">
+                <h2>Your Style Profile</h2>
+                <div class="style-info">
+                    {% if overall_style %}
+                        <p>Signature Style: <strong>{{ overall_style }}</strong></p>
+                    {% endif %}
+                    {% if overall_image %}
+                        <div class="favorite-item">
+                            <p>Favorite Piece:</p>
+                            <div class="image-container">
+                                <img src="{{ url_for('static', filename=overall_image.replace('C:/Outfit Builder/static/', '')) }}" class="favorite-item-image">
+                                <div class="popup">Buy this product</div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="charts">
+                    <div class="chart-container">
+                        <h3>Style Distribution</h3>
+                        <img src="data:image/png;base64,{{ style_chart }}" alt="Style Distribution" class="chart-image">
+                    </div>
+                    <div class="chart-container">
+                        <h3>Item Type Distribution</h3>
+                        <img src="data:image/png;base64,{{ type_chart }}" alt="Item Type Distribution" class="chart-image">
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <section class="previous-curations">
+            <h2>Your Style Journey</h2>
+            <div class="curated-fits-container">
+                {% for fit in curated_fits %}
+                    <div class="curated-fit">
+                        <h3>{{ fit.title }}</h3>
+                        <div class="outfit-display">
+                            {% for item in fit.items %}
+                                <img src="{{ url_for('static', filename=item['File path'].replace('C:/Outfit Builder/static/', '')) }}" alt="{{ item['Style'] }}" class="selected-item-image">
+                            {% endfor %}
+                        </div>
+                        <button class="share-button">
+                            <i class="fa fa-share-alt"></i> Share
+                        </button>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Fashion Curation App. All rights reserved.</p>
+    </footer>
+</body>
+</html>

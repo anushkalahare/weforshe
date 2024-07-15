@@ -1,0 +1,34 @@
+<!-- templates/register.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Fashion Curation App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='reg_log.css') }}">
+</head>
+<body class="auth-page">
+    <div class="auth-container">
+        <div class="auth-form">
+            <h1>Create Your Account</h1>
+            <p>Join Moda and start curating your style!</p>
+            <form action="{{ url_for('register') }}" method="post">
+                <div class="form-group">
+                    <input type="text" id="username" name="username" placeholder="Username" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" name="email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                </div>
+                <button type="submit" class="auth-button">Sign Up</button>
+            </form>
+            <p class="auth-link">Already have an account? <a href="{{ url_for('login') }}">Log in</a></p>
+        </div>
+        <div class="auth-image">
+            <img src="{{ url_for('static', filename='images/auth-image.png') }}" alt="Fashion Curation">
+        </div>
+    </div>
+</body>
+</html>

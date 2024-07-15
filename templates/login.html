@@ -1,0 +1,32 @@
+<!-- templates/login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Fashion Curation App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='reg_log.css') }}">
+</head>
+<body class="auth-page">
+    <div class="auth-container">
+        <div class="auth-form">
+            <h1>Welcome Back</h1>
+            <p>Log in to your Moda account</p>
+            <form action="{{ url_for('login') }}" method="post">
+                <div class="form-group">
+                    <input type="text" id="username" name="username" placeholder="Username" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                </div>
+                <button type="submit" class="auth-button">Log In</button>
+            </form>
+            <p class="auth-link">Don't have an account? <a href="{{ url_for('register') }}">Sign up</a></p>
+        </div>
+        <div class="auth-image">
+            <img src="{{ url_for('static', filename='images/auth-image.png') }}" alt="Fashion Curation">
+        </div>
+    </div>
+</body>
+</html>
+

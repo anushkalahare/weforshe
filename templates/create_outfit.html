@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outfit Builder</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='create_outfit.css') }}">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        var selectedItems = {{ selected_items|tojson|safe }};
+    </script>
+</head>
+<body>
+    <header class="main-header">
+        <h1>Moda</h1>
+        <nav class="main-nav">
+            <ul class="nav-links">
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('explore') }}">Explore</a></li>
+                <li><a href="{{ url_for('profile', username=current_user.username) }}">Profile</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="sub-header">
+        <h2>Build Your Outfit</h2>
+        <nav class="sub-nav">
+            <ul class="nav-links">
+                <li>|</li><li><a href="{{ url_for('create_outfit', type='accessories') }}">Accessories</a></li>
+                <li>|</li><li><a href="{{ url_for('create_outfit', type='footwear') }}">Footwear</a></li>
+                <li>|</li><li><a href="{{ url_for('create_outfit', type='fullbody wear') }}">Fullbody Wear</a></li>
+                <li>|</li><li><a href="{{ url_for('create_outfit', type='upperbody wear') }}">Upperbody Wear</a></li>
+                <li>|</li><li><a href="{{ url_for('create_outfit', type='lowerbody wear') }}">Lowerbody Wear</a></li><li>|</li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="container">
+        <div class="left-column">
+            <form id="outfitForm" action="{{ url_for('submit') }}" method="POST">
+                <input type="hidden" id="selectedItems" name="selectedItems" value="{{ selected_items|tojson }}">
+                {% for type, items in items_by_type.items() %}
+                    <h3>{{ type }}</h3>
+                    <div class="items">
+                        {% for item in items %}
+                            <div class="item">
+                                <div class="checkbox-wrapper">
+                                    <input type="checkbox" class="check" id="item{{ item['Srno'] }}" name="item" value="{{ item['Srno'] }}">
+                                    <label for="item{{ item['Srno'] }}">
+                                        <img src="{{ url_for('static', filename=item['File path']) }}" alt="{{ item['Style'] }}" class="item-image">
+                                    </label>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </form>
+        </div>
+        <div class="right-column">
+            <h3>Curated Fit</h3>
+            <div id="outfitDisplay" class="outfit-display">
+                <!-- Selected items will be dynamically inserted here by JavaScript -->
+            </div>
+            <div class="outfit-title">
+                <label for="outfitTitle">Outfit Title:</label>
+                <input type="text" id="outfitTitle" name="outfitTitle" placeholder="Enter a title for your outfit">
+            </div>
+            <button type="submit" form="outfitForm" class="submit-button">Submit Outfit</button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
